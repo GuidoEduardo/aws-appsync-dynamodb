@@ -1,0 +1,27 @@
+type User {
+    user: ID!
+    username: String!
+    email: String!
+    role: String!
+    createdAt: Float!
+    updatedAt: Float!
+}
+
+input UserInput {
+    username: String!
+    email: String!
+    role: String!
+}
+
+type Query {
+    getUserById(user: String!): User
+}
+
+type Mutation {
+    createUser(input: UserInput!): User!
+}
+
+schema { 
+    query: Query
+    mutation: Mutation
+}

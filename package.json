@@ -1,0 +1,14 @@
+{
+	"devDependencies": {
+		"@types/node": "20.8.2",
+		"cross-env": "7.0.3",
+		"typescript": "5.2.2"
+	},
+	"dependencies": {
+		"@aws-sdk/client-dynamodb": "^3.427.0",
+		"@graphql-tools/schema": "^10.0.0",
+		"electrodb": "^2.10.1",
+		"graphql": "^16.8.1",
+		"graphql-yoga": "4.0.5"
+	}
+}
