@@ -1,5 +1,33 @@
+directive @oneOf on INPUT_OBJECT | FIELD_DEFINITION
+
+interface BaseError {
+    message: String!
+}
+
+type NotFoundError implements BaseError {
+    message: String!
+}
+
+type InputErrorField {
+    code: String!
+    fatal: String
+    message: String!
+    path: [String]!
+}
+
+type InvalidInputError implements BaseError {
+    fields: [InputErrorField]
+    message: String!
+}
+
+type UnknownError implements BaseError {
+    message: String!
+}
+
 type User {
     user: ID!
+    firstName: String!
+    lastName: String!
     username: String!
     email: String!
     role: String!
@@ -8,17 +36,27 @@ type User {
 }
 
 input UserInput {
+    firstName: String!
+    lastName: String!
     username: String!
     email: String!
     role: String!
 }
 
+input UserBy @oneOf {
+    user: ID!
+    email: String
+    username: String
+}
+
+union CreateUserResult = User | InvalidInputError | UnknownError
+
 type Query {
-    getUserById(user: String!): User
+    user(by: UserBy!): User!
 }
 
 type Mutation {
-    createUser(input: UserInput!): User!
+    createUser(input: UserInput!): CreateUserResult!
 }
 
 schema { 

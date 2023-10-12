@@ -1,10 +1,35 @@
 import { User } from '../../model'
+import { UserSchema } from '../../schemas'
 import { createUserOptions } from './types'
+import { ZodError } from 'zod'
 
 export async function createUser(options: createUserOptions) {
-    const { username, email, role } = options.input
+  try {
+    const isValidData = UserSchema.parse(options.input)
 
-    const user = await User.create({ username, email, role }).go()
+    if (!isValidData) {
+      throw new ZodError(isValidData)
+    }
 
-    return user.data
+    const user = await User.create(options.input).go()
+
+    return {
+      __typename: "User",
+      ...user.data
+    }
+  }
+  catch (err: unknown) {
+    if (err instanceof ZodError) {
+      return {
+        __typename: "InvalidInputError",
+        message: "Invalid input",
+        fields: err.issues
+      }
+    }
+
+    return {
+      __typename: "UnknownError",
+      message: `Unknown error: ${err}`
+    }
+  }
 }
