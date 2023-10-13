@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 import { Entity } from 'electrodb'
 import { table, client } from '../common'
 
-export const Issue = new Entity(
+export const IssueModel = new Entity(
   {
     model: {
       entity: 'issue',

@@ -2,15 +2,15 @@ import { Entity } from 'electrodb'
 import { table, client } from '../common'
 import { randomUUID } from 'crypto'
 
-export const Project = new Entity(
+export const TeamModel = new Entity(
   {
     model: {
-      entity: 'project',
+      entity: 'team',
       version: '1',
       service: 'projectmanager',
     },
     attributes: {
-      project: {
+      team: {
         type: 'string',
         readOnly: true,
         default: () => randomUUID(),
@@ -18,34 +18,47 @@ export const Project = new Entity(
       name: {
         type: 'string',
       },
-      team: {
+      leader: {
         type: 'string',
       },
-      issues: {
+      members: {
         type: 'set',
         items: 'string',
       },
-      created_at: {
+      createdAt: {
         type: 'number',
         readOnly: true,
         default: () => Date.now(),
       },
-      updated_at: {
+      updatedAt: {
         type: 'number',
         readOnly: true,
+        watch: '*',
         default: () => Date.now(),
         set: () => Date.now(),
       },
     },
     indexes: {
-      byTeam: {
+      team: {
         pk: {
           field: 'pk',
-          composite: ['project'],
+          composite: ['team'],
         },
         sk: {
           field: 'sk',
           composite: [],
+        },
+      },
+      leader: {
+        collection: 'user',
+        index: 'gsi1pk-gsi1sk-index',
+        pk: {
+          field: 'gsi1pk',
+          composite: ['leader'],
+        },
+        sk: {
+          field: 'gsi1sk',
+          composite: ['team', 'name'],
         },
       },
     },

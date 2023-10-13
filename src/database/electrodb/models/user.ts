@@ -1,29 +1,31 @@
 import { Entity } from 'electrodb'
 import { table, client } from '../common'
-import { randomUUID } from 'crypto'
 
-export const Team = new Entity(
+export const UserModel = new Entity(
   {
     model: {
-      entity: 'team',
+      entity: 'user',
       version: '1',
       service: 'projectmanager',
     },
     attributes: {
-      team: {
-        type: 'string',
-        readOnly: true,
-        default: () => randomUUID(),
-      },
-      name: {
+      id: {
         type: 'string',
       },
-      leader: {
+      firstName: {
         type: 'string',
       },
-      members: {
-        type: 'set',
-        items: 'string',
+      lastName: {
+        type: 'string',
+      },
+      username: {
+        type: 'string',
+      },
+      email: {
+        type: 'string',
+      },
+      role: {
+        type: 'string',
       },
       createdAt: {
         type: 'number',
@@ -32,33 +34,21 @@ export const Team = new Entity(
       },
       updatedAt: {
         type: 'number',
-        readOnly: true,
         watch: '*',
+        readOnly: true,
         default: () => Date.now(),
         set: () => Date.now(),
       },
     },
     indexes: {
-      team: {
+      user: {
         pk: {
           field: 'pk',
-          composite: ['team'],
+          composite: ['id'],
         },
         sk: {
           field: 'sk',
-          composite: [],
-        },
-      },
-      leader: {
-        collection: 'user',
-        index: 'gsi1pk-gsi1sk-index',
-        pk: {
-          field: 'gsi1pk',
-          composite: ['leader'],
-        },
-        sk: {
-          field: 'gsi1sk',
-          composite: ['team', 'name'],
+          composite: ['username', 'email'],
         },
       },
     },

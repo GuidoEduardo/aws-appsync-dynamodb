@@ -1,56 +1,47 @@
 import { Entity } from 'electrodb'
-import { randomUUID } from 'crypto'
 import { table, client } from '../common'
+import { randomUUID } from 'crypto'
 
-export const User = new Entity(
+export const ProjectModel = new Entity(
   {
     model: {
-      entity: 'user',
+      entity: 'project',
       version: '1',
       service: 'projectmanager',
     },
     attributes: {
-      user: {
+      project: {
         type: 'string',
         readOnly: true,
         default: () => randomUUID(),
       },
-      firstName: {
+      name: {
         type: 'string',
       },
-      lastName: {
+      team: {
         type: 'string',
       },
-      username: {
-        type: 'string',
-        validate: /^\S+$/,
+      issues: {
+        type: 'set',
+        items: 'string',
       },
-      email: {
-        type: 'string',
-        validate:
-          /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/,
-      },
-      role: {
-        type: ['admin', 'project_lead', 'collaborator'] as const,
-      },
-      createdAt: {
+      created_at: {
         type: 'number',
         readOnly: true,
         default: () => Date.now(),
       },
-      updatedAt: {
+      updated_at: {
         type: 'number',
-        watch: '*',
         readOnly: true,
         default: () => Date.now(),
         set: () => Date.now(),
       },
     },
     indexes: {
-      user: {
+      byTeam: {
         pk: {
           field: 'pk',
-          composite: ['user'],
+          composite: ['project'],
         },
         sk: {
           field: 'sk',

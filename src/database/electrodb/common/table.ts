@@ -3,11 +3,7 @@ import { dynamodb } from './client'
 
 export const table = 'awslearning'
 
-type CreateTableManagerOptions = {
-  tableName: string
-}
-
-export function createTableManager(options: CreateTableManagerOptions) {
+export function createTableManager(options: { tableName: string }) {
   const { tableName } = options
 
   return {
@@ -24,11 +20,7 @@ export function createTableManager(options: CreateTableManagerOptions) {
   }
 }
 
-type InitializeTableOptions = {
-  tableName: string
-}
-
-export async function initializeTable(options: InitializeTableOptions) {
+export async function initializeTable(options: { tableName: string }) {
   const { tableName } = options
   const tableManager = createTableManager({ tableName })
   const exists = await tableManager.exists()
