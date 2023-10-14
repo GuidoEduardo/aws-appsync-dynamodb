@@ -1,79 +1,57 @@
-import gql from "graphql-tag"
-
+import gql from 'graphql-tag'
 
 export const user = gql`
-    directive @oneOf on INPUT_OBJECT | FIELD_DEFINITION
+  type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    username: String!
+    email: String!
+    role: String!
+    createdAt: Float!
+    updatedAt: Float!
+  }
 
-    interface BaseError {
-        message: String!
-    }
+  type Users {
+    users: [User]
+  }
 
-    type NotFoundError implements BaseError {
-        message: String!
-    }
+  input UserInput {
+    firstName: String!
+    lastName: String!
+    username: String!
+    email: String!
+    role: String!
+  }
 
-    type InputErrorField {
-        code: String!
-        fatal: String
-        message: String!
-        path: [String]!
-    }
+  input UserBy {
+    id: ID
+    firstName: String
+    lastName: String
+    username: String
+    email: String
+    role: String
+  }
 
-    type DatabaseError implements BaseError {
-        message: String!
-    }
+  union UserResult =
+      User
+    | Users
+    | DatabaseError
+    | InvalidInputError
+    | UnknownError
+    | NotFoundError
+    
+  type Query {
+    findUser(by: UserBy!): UserResult!
+    getUser(id: String!): UserResult!
+  }
 
-    type InvalidInputError implements BaseError {
-        fields: [InputErrorField]
-        message: String!
-    }
+  type Mutation {
+    createUser(input: UserInput!): UserResult!
+  }
 
-    type NotUniqueError implements BaseError {
-        field: InputErrorField!
-        message: String!
-    }
-
-    type UnknownError implements BaseError {
-        message: String!
-    }
-
-    type User {
-        user: ID!
-        firstName: String!
-        lastName: String!
-        username: String!
-        email: String!
-        role: String!
-        createdAt: Float!
-        updatedAt: Float!
-    }
-
-    input UserInput {
-        firstName: String!
-        lastName: String!
-        username: String!
-        email: String!
-        role: String!
-    }
-
-    input UserBy @oneOf {
-        user: ID!
-        email: String
-        username: String
-    }
-
-    union CreateUserResult = User | DatabaseError | InvalidInputError | NotUniqueError | UnknownError
-
-    type Query {
-        userBy(by: UserBy!): User!
-    }
-
-    type Mutation {
-        createUser(input: UserInput!): CreateUserResult!
-    }
-
-    schema { 
-        query: Query
-        mutation: Mutation
-    }
+  schema {
+    query: Query
+    mutation: Mutation
+  }
 `

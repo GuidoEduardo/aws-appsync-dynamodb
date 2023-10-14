@@ -48,7 +48,7 @@ export const UserModel = new Entity(
         },
         sk: {
           field: 'sk',
-          composite: ['username', 'email'],
+          composite: [],
         },
       },
     },
