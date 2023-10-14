@@ -1,6 +1,6 @@
 import { User } from '../entities'
 import { randomUUID } from 'crypto'
-import RepositoryInterface from '../repository/repositoryInterface'
+import RepositoryInterface from '../interfaces/repository'
 
 export class UserController {
   constructor(private readonly userRepository: RepositoryInterface<User>) { }

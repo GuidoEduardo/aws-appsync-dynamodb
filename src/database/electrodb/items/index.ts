@@ -3,10 +3,10 @@ import { UserModel } from './user'
 import { table, client } from '../common'
 
 export const projectmanager = new Service(
-  {
-    user: UserModel,
-  },
-  { table, client },
+    {
+        user: UserModel,
+    },
+    { table, client },
 )
 
 export { UserModel }
