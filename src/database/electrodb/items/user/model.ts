@@ -1,7 +1,7 @@
 import { Entity } from 'electrodb'
 import { table, client } from '../../common'
 
-export const UserModel = new Entity(
+export const users = new Entity(
     {
         model: {
             entity: 'user',

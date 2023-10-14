@@ -1,7 +1,8 @@
 {
-  "semi": false,
-  "singleQuote": true,
-  "arrowParens": "avoid",
-  "printWidth": 80,
-  "ignore": ["node_modules/**", "build/**", ".vscode/**", ".gitignore"]
+    "semi": false,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "printWidth": 80,
+    "tabWidth": 4,
+    "ignore": ["node_modules/**", "build/**", ".vscode/**", ".gitignore"]
 }

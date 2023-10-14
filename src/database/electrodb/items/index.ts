@@ -1,12 +1,10 @@
 import { Service } from 'electrodb'
-import { UserModel } from './user'
+import { users } from './user'
 import { table, client } from '../common'
 
 export const projectmanager = new Service(
     {
-        user: UserModel,
+        user: users,
     },
     { table, client },
 )
-
-export { UserModel }

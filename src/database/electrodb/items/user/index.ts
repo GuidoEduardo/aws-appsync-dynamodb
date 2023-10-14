@@ -1,2 +1,2 @@
-export { UserModel } from './model'
+export { users } from './model'
 export { ElectroUserRepository } from './repository'

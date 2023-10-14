@@ -1,23 +1,27 @@
-import { User } from '../../../../entities'
-import { UserModel } from './model'
-import { UserInput, Users } from '../../../../entities/user'
-import { NotFoundError } from '../../../../errors'
-import RepositoryInterface from '../../../../interfaces/repository'
+import { User } from 'entities'
+import { users } from './model'
+import { UserInput, Users } from 'entities/user'
+import { NotFoundError } from 'errors'
+import RepositoryInterface from 'interfaces/repository'
+import { EntityItem, QueryResponse } from 'electrodb'
 
-export class ElectroUserRepository
-    implements RepositoryInterface<User>
-{
+type UserItem = EntityItem<typeof users>
+type UserQueryResponse = QueryResponse<typeof users>
+
+export class ElectroUserRepository implements RepositoryInterface<User> {
     async create(user: UserInput): Promise<User> {
-        const userData = await UserModel.create({
-            id: user.id!,
-            ...user,
-        }).go()
+        const userData = await users
+            .create({
+                id: user.id!,
+                ...user,
+            })
+            .go()
 
         return User.parse(userData.data)
     }
 
     async get(id: string): Promise<User> {
-        const userData = await UserModel.get({ id }).go()
+        const userData = await users.get({ id }).go()
 
         if (!userData.data) {
             throw new NotFoundError()
@@ -26,9 +30,15 @@ export class ElectroUserRepository
         return User.parse(userData.data)
     }
 
-    async find(user: UserInput): Promise<User[]> {
-        const usersData = await UserModel.match(user).go()
+    async find(search: SearchOptions<User>): Promise<User[]> {
+        const { by, options } = search
+        const { limit, offset } = options
 
-        return Users.parse(usersData.data)
+        const results = await users.match(by).go({
+            limit,
+            logger: console.log,
+        })
+
+        return Users.parse(results.data)
     }
 }
