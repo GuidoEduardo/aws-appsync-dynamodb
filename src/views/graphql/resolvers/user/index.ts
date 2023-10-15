@@ -1,4 +1,4 @@
-import { User, UserInput } from 'entities/user'
+import { User, UserInput } from '../../../../entities/user'
 import { createUser } from './mutation'
 import { findUser, getUser } from './query'
 

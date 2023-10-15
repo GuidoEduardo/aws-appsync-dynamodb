@@ -1,6 +1,6 @@
 import { ZodError } from 'zod'
-import { userController } from 'controllers'
-import { UserInput } from 'entities/user'
+import { userController } from '../../../../controllers'
+import { UserInput } from '../../../../entities/user'
 
 export async function createUser(options: { input: UserInput }) {
     try {

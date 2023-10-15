@@ -24,8 +24,7 @@
         "zod": "^3.22.4"
     },
     "scripts": {
-        "dev": "ts-node-dev --project tsconfig.json src/app.ts",
-        "start": "ts-node --project tsconfig.json src/app.ts",
+        "build": "tsc -p . && node dist/app.js",
         "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
         "format": "prettier --write \"**/*.+(js|ts|json)\""
     }

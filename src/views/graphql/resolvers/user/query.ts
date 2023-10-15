@@ -1,7 +1,7 @@
 import { ZodError } from 'zod'
-import { userController } from 'controllers'
-import { User } from 'entities/user'
-import { NotFoundError } from 'errors'
+import { userController } from '../../../../controllers'
+import { User } from '../../../../entities/user'
+import { NotFoundError } from '../../../../errors'
 
 export async function findUser(options: { search: SearchOptions<User> }) {
     try {

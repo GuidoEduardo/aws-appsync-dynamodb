@@ -1,5 +1,5 @@
 import { UserController } from './user'
-import { ElectroUserRepository } from 'database/electrodb/items/user'
+import { ElectroUserRepository } from '../database/electrodb/items/user'
 
 export const defaultOptions = {
     offset: 0,

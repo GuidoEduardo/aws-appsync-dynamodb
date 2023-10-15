@@ -1,15 +1,5 @@
-import Logger from 'interfaces/logger'
-import TSLogConsoleLogger from 'loggers/tslog'
+export { execMethod } from './decorators'
+import CustomLogger from '../interfaces/logger'
+import TSConsoleLogger from './tslog'
 
-let logger: Logger
-
-export class LoggerFactory {
-    public static getInstance(): Logger {
-        if (!logger) {
-            console.log('PORRA')
-            logger = new TSLogConsoleLogger()
-        }
-
-        return logger
-    }
-}
+export const logger: CustomLogger = new TSConsoleLogger()
