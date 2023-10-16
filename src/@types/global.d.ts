@@ -1,11 +1,15 @@
-export {}
+export { }
 
 declare global {
+    type OptionalProperties<T> = {
+        [K in keyof T]?: T[K]
+    }
+
     type SearchOptions<T> = {
-        options: {
-            offset: number
-            limit: number
+        options?: {
+            offset?: number
+            limit?: number
         }
-        by: T
+        by: OptionalProperties<T>
     }
 }

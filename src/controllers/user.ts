@@ -5,7 +5,7 @@ import RepositoryInterface from '../interfaces/repository'
 import { execMethod } from '../loggers'
 
 export class UserController {
-    constructor(private readonly userRepository: RepositoryInterface<User>) {}
+    constructor(private readonly userRepository: RepositoryInterface<User>) { }
 
     @execMethod
     public async create(userInput: User): Promise<User> {

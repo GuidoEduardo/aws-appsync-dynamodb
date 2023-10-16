@@ -7,14 +7,22 @@
         "module": "CommonJS",
         "inlineSourceMap": true,
         "strict": true,
+        "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "typeRoots": ["./node_modules/@types", "./src/@types"]
+        "typeRoots": [
+            "./node_modules/@types",
+            "./src/@types"
+        ]
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules"]
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

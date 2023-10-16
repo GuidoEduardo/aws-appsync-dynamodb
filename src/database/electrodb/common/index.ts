@@ -1,2 +1,2 @@
 export { client, dynamodb } from './client'
-export { createTableManager, initializeTable, table } from './table'
+export { initializeTable, table } from './table'
