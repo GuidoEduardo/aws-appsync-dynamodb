@@ -1,4 +1,4 @@
-import tableDef from './definition.json'
+import tableDef from './config.json'
 import { dynamodb } from './client'
 
 export const table = 'awslearning'
