@@ -1,6 +1,6 @@
 export class NotFoundError extends Error {
     constructor() {
-        super('Not found error')
+        super('NotFoundError')
 
         Object.setPrototypeOf(this, NotFoundError.prototype)
     }

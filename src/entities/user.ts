@@ -37,7 +37,6 @@ export const User = z.object({
     createdAt,
     updatedAt,
 })
-
 export const Users = z.array(User)
 
 export type UserRoles = z.infer<typeof role>
