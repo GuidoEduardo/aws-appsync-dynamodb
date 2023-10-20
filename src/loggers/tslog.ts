@@ -1,4 +1,3 @@
-import CustomLogger from '../interfaces/logger'
 import { Logger, ILogObj } from 'tslog'
 
 export default class TSConsoleLogger implements CustomLogger {

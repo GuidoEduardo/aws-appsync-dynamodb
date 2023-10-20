@@ -1,7 +1,6 @@
 import { User } from '../entities'
 import { randomUUID } from 'crypto'
 import { defaultOptions } from '.'
-import RepositoryInterface from '../interfaces/repository'
 import { decorateAll, logMethodCall } from '../loggers'
 
 @decorateAll(logMethodCall)
