@@ -12,4 +12,22 @@ declare global {
         }
         by: OptionalProperties<T>
     }
+
+    interface CustomLogger {
+        log(message: string): void
+
+        debug(message: string): void
+    
+        warn(message: string): void
+    
+        error(message: string): void
+    }
+
+    interface RepositoryInterface<T> {
+        create(options: object): Promise<T>
+    
+        get(id: string): Promise<T>
+    
+        find(search: object): Promise<T[]>
+    }
 }

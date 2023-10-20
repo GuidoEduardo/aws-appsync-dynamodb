@@ -1,5 +1,3 @@
-import CustomLogger from '../interfaces/logger'
-
 export default class ConsoleLogger implements CustomLogger {
     public log(message: string) {
         console.log(message)

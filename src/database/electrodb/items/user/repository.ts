@@ -2,7 +2,6 @@ import { User } from '../../../../entities'
 import { users } from './model'
 import { UserInput, Users } from '../../../../entities/user'
 import { NotFoundError } from '../../../../errors'
-import RepositoryInterface from '../../../../interfaces/repository'
 import { decorateAll, logMethodCall } from '../../../../loggers'
 
 @decorateAll(logMethodCall)
